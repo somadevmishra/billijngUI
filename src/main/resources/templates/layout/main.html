@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <meta charset="UTF-8">
@@ -25,12 +28,15 @@
 
 <body>
 
-<header>
-    <!-- Navbar will be added in Issue #3 -->
+<header th:replace="~{fragments/navbar :: navbar}">
 </header>
 
-<main class="container-fluid py-4">
-    <!-- Page-specific content will be rendered here -->
+<main class="container py-4">
+
+    <section layout:fragment="content">
+        <!-- Page Content -->
+    </section>
+
 </main>
 
 <footer class="border-top py-3 mt-5">
