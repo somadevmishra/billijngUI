@@ -9,11 +9,11 @@ class GlobalModelAttributes(
 ) {
 
     @ModelAttribute("appName")
-    fun appName() = uiProperties.appName
+    fun appName() = uiProperties.application.name
 
     @ModelAttribute("companyName")
-    fun companyName() = uiProperties.companyName
+    fun companyName() = uiProperties.application.company
 
     @ModelAttribute("appVersion")
-    fun appVersion() = uiProperties.version
+    fun appVersion() = uiProperties.application.version
 }

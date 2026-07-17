@@ -18,4 +18,15 @@ class CategoryController(
         model.addAttribute("page", categoryUiService.getCategoryPage())
         return "category/list"
     }
+
+    @GetMapping("/new")
+    fun showCreateForm(model: Model): String {
+
+        model.addAttribute(
+            "page",
+            categoryUiService.getCreateCategoryPage()
+        )
+
+        return "category/form"
+    }
 }

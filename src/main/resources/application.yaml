@@ -6,13 +6,31 @@ spring:
     name: cafe-ui
 
 ui:
-  app-name: Cafe Billing
-  company-name: ABC Cafe Billing
-  version: 1.0.0
-  currency-symbol: "₹"
-  page-size: 20
-  date-format: "dd-MMM-yyyy"
+
+  application:
+    name: Cafe Billing
+    company: ABC Cafe Billing
+    version: 1.0.0
+
+  branding:
+    logo: /images/logo.png
+    favicon: /images/favicon.ico
+
+  icons:
+    dashboard: bi-speedometer2
+    category: bi-tags-fill
+    item: bi-cup-hot-fill
+    bill: bi-receipt
+    report: bi-graph-up
+    settings: bi-gear-fill
+
+  formatting:
+    currency-symbol: "₹"
+    date-format: "dd-MMM-yyyy"
+
+  pagination:
+    page-size: 20
 
 billing:
   api:
-    base-url: "http://localhost:9081"
+    base-url: http://localhost:9081

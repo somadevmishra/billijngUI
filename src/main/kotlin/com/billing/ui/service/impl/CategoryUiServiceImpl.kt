@@ -1,12 +1,16 @@
 package com.billing.ui.service.impl
 
+import com.billing.ui.config.UiProperties
 import com.billing.ui.service.CategoryUiService
+import com.billing.ui.view.category.CategoryFormView
 import com.billing.ui.view.category.CategoryPageView
 import com.billing.ui.view.category.CategoryView
 import org.springframework.stereotype.Service
 
 @Service
-class CategoryUiServiceImpl : CategoryUiService {
+class CategoryUiServiceImpl(
+    private val uiProperties: UiProperties
+) : CategoryUiService {
     override fun getCategoryPage(): CategoryPageView {
 
         val categories = listOf(
@@ -34,9 +38,7 @@ class CategoryUiServiceImpl : CategoryUiService {
                 displayOrder = 3,
                 active = false
             )
-
         )
-
         return CategoryPageView(
 
             pageTitle = "Categories",
@@ -45,6 +47,16 @@ class CategoryUiServiceImpl : CategoryUiService {
 
             totalRecords = categories.size
 
+        )
+    }
+
+    override fun getCreateCategoryPage(): CategoryFormView {
+        return CategoryFormView(
+            title = "New Category",
+            subtitle = "Create a new Category",
+            icon = uiProperties.icons.category,
+            active = true,
+            editMode = false
         )
     }
 }
