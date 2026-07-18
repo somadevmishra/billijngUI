@@ -33,4 +33,4 @@ ui:
 
 billing:
   api:
-    base-url: http://localhost:9081
+    base-url: http://localhost:9080/

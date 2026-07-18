@@ -8,7 +8,5 @@ data class CategoryView (
 
     val description: String?,
 
-    val displayOrder: Int,
-
     val active: Boolean
 )

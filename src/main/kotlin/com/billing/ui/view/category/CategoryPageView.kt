@@ -3,7 +3,9 @@ package com.billing.ui.view.category
 import java.util.Collections.emptyList
 
 data class CategoryPageView(
-    val pageTitle: String,
+    val title: String,
+
+    val subtitle: String,
 
     val searchText: String = "",
 
