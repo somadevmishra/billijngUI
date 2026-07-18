@@ -1,6 +1,8 @@
 package com.billing.ui.service.impl
 
 import com.billing.ui.client.category.CategoryApiClient
+import com.billing.ui.client.dto.category.CategoryDto
+import com.billing.ui.client.dto.category.CreateCategoryRequestDto
 import com.billing.ui.config.UiProperties
 import com.billing.ui.service.CategoryUiService
 import com.billing.ui.view.category.CategoryFormView
@@ -52,4 +54,39 @@ class CategoryUiServiceImpl(
             editMode = false
         )
     }
+
+    override fun createCategory(
+        form: CategoryFormView
+    ): CategoryDto {
+
+        return categoryApiClient.create(
+
+            CreateCategoryRequestDto(
+
+                name = form.name,
+
+                description = form.description,
+
+                active = form.active
+
+            )
+
+        )
+
+    }
+
+    override fun rebuildCreateCategoryPage(
+        page: CategoryFormView
+    ): CategoryFormView =
+        getCreateCategoryPage().copy(
+
+            code = page.code,
+
+            name = page.name,
+
+            description = page.description,
+
+            active = page.active
+
+        )
 }

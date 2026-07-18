@@ -6,27 +6,23 @@
 
 <section layout:fragment="content">
 
-    <!-- ===================================================== -->
+    <!-- ====================================================== -->
     <!-- Page Header -->
-    <!-- ===================================================== -->
+    <!-- ====================================================== -->
 
     <div class="d-flex align-items-center mb-4">
 
         <div class="bg-primary text-white rounded p-3 me-3">
-
-            <i th:class="${page.icon + ' fs-3'}"></i>
-
+            <i class="bi bi-tags-fill fs-3"></i>
         </div>
 
         <div>
 
-            <h2 class="mb-1"
-                th:text="${page.title}">
+            <h2 class="mb-1" th:text="${page.title}">
                 New Category
             </h2>
 
-            <p class="text-muted mb-0"
-               th:text="${page.subtitle}">
+            <p class="text-muted mb-0" th:text="${page.subtitle}">
                 Create a new category.
             </p>
 
@@ -34,9 +30,9 @@
 
     </div>
 
-    <!-- ===================================================== -->
-    <!-- Form -->
-    <!-- ===================================================== -->
+    <!-- ====================================================== -->
+    <!-- Category Form -->
+    <!-- ====================================================== -->
 
     <div class="row justify-content-center">
 
@@ -58,7 +54,10 @@
 
                 <div class="card-body">
 
-                    <form>
+                    <form
+                            th:action="@{/categories}"
+                            th:object="${page}"
+                            method="post">
 
                         <!-- Category Code (Edit Mode Only) -->
 
@@ -78,22 +77,22 @@
                                 <input
                                         type="text"
                                         class="form-control"
-                                        th:value="${page.code}"
+                                        th:field="*{code}"
                                         readonly>
 
                             </div>
 
                         </div>
 
-                        <!-- Category Name -->
+                        <!-- Name -->
 
                         <div class="row mb-3">
 
                             <label
                                     for="name"
-                                    class="col-sm-3 col-form-label required">
+                                    class="col-sm-3 col-form-label">
 
-                                Category Name
+                                Category Name <span class="text-danger">*</span>
 
                             </label>
 
@@ -103,8 +102,15 @@
                                         id="name"
                                         type="text"
                                         class="form-control"
-                                        th:value="${page.name}"
-                                        placeholder="Enter category name">
+                                        th:field="*{name}"
+                                        maxlength="100"
+                                        autofocus>
+
+                                <div
+                                        class="text-danger small"
+                                        th:if="${#fields.hasErrors('name')}"
+                                        th:errors="*{name}">
+                                </div>
 
                             </div>
 
@@ -128,8 +134,7 @@
                                         id="description"
                                         rows="4"
                                         class="form-control"
-                                        th:text="${page.description}"
-                                        placeholder="Enter description">
+                                        th:field="*{description}">
                                 </textarea>
 
                             </div>
@@ -148,11 +153,11 @@
                                             id="active"
                                             type="checkbox"
                                             class="form-check-input"
-                                            th:checked="${page.active}">
+                                            th:field="*{active}">
 
                                     <label
-                                            class="form-check-label"
-                                            for="active">
+                                            for="active"
+                                            class="form-check-label">
 
                                         Active
 
