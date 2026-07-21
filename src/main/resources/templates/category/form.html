@@ -3,101 +3,60 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout/main}">
-
 <section layout:fragment="content">
-
-    <!-- ====================================================== -->
-    <!-- Page Header -->
-    <!-- ====================================================== -->
-
     <div class="d-flex align-items-center mb-4">
-
         <div class="bg-primary text-white rounded p-3 me-3">
             <i class="bi bi-tags-fill fs-3"></i>
         </div>
-
         <div>
-
             <h2 class="mb-1" th:text="${page.title}">
                 New Category
             </h2>
-
             <p class="text-muted mb-0" th:text="${page.subtitle}">
                 Create a new category.
             </p>
-
         </div>
-
     </div>
-
-    <!-- ====================================================== -->
-    <!-- Category Form -->
-    <!-- ====================================================== -->
-
     <div class="row justify-content-center">
-
         <div class="col-lg-8">
-
             <div class="card shadow-sm">
-
                 <div class="card-header">
-
                     <strong>
-
                         <i class="bi bi-info-circle me-2"></i>
-
                         Category Information
-
                     </strong>
-
                 </div>
-
                 <div class="card-body">
-
                     <form
-                            th:action="@{/categories}"
                             th:object="${page}"
+                            th:action="${page.editMode}
+                            ? @{/categories/{id}(id=${page.id})}
+                            : @{/categories}"
                             method="post">
-
                         <!-- Category Code (Edit Mode Only) -->
-
                         <div
                                 class="row mb-3"
                                 th:if="${page.editMode}">
-
                             <label
                                     class="col-sm-3 col-form-label">
-
                                 Category Code
-
                             </label>
-
                             <div class="col-sm-9">
-
                                 <input
                                         type="text"
                                         class="form-control"
                                         th:field="*{code}"
                                         readonly>
-
                             </div>
-
                         </div>
-
                         <!-- Name -->
-
                         <div class="row mb-3">
-
                             <label
                                     for="name"
                                     class="col-sm-3 col-form-label">
-
                                 Category Name <span class="text-danger">*</span>
-
                             </label>
-
                             <div class="col-sm-9">
-
                                 <input
                                         id="name"
                                         type="text"
@@ -111,102 +70,63 @@
                                         th:if="${#fields.hasErrors('name')}"
                                         th:errors="*{name}">
                                 </div>
-
                             </div>
-
                         </div>
-
                         <!-- Description -->
-
                         <div class="row mb-3">
-
                             <label
                                     for="description"
                                     class="col-sm-3 col-form-label">
-
                                 Description
-
                             </label>
-
                             <div class="col-sm-9">
-
                                 <textarea
                                         id="description"
                                         rows="4"
                                         class="form-control"
                                         th:field="*{description}">
                                 </textarea>
-
                             </div>
-
                         </div>
-
                         <!-- Active -->
-
                         <div class="row mb-4">
-
                             <div class="offset-sm-3 col-sm-9">
-
                                 <div class="form-check">
-
                                     <input
                                             id="active"
                                             type="checkbox"
                                             class="form-check-input"
                                             th:field="*{active}">
-
                                     <label
                                             for="active"
                                             class="form-check-label">
-
                                         Active
-
                                     </label>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                         <hr>
-
                         <!-- Buttons -->
-
                         <div class="d-flex justify-content-end">
-
                             <button
                                     type="submit"
                                     class="btn btn-primary">
-
                                 <i class="bi bi-floppy me-1"></i>
-
-                                Save
-
+                                <span th:text="${page.editMode} ? 'Update' : 'Save'">
+                                    Save
+                                </span>
                             </button>
-
                             <a
-                                    th:href="@{/categories}"
-                                    class="btn btn-outline-secondary ms-2">
-
+                                th:href="@{/categories}"
+                                class="btn btn-outline-secondary ms-2">
                                 <i class="bi bi-arrow-left me-1"></i>
-
                                 Cancel
-
                             </a>
-
                         </div>
-
                     </form>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
-
 </html>

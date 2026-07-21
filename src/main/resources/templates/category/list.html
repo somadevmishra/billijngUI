@@ -162,14 +162,14 @@
 
                         <td class="text-center">
 
-                            <button
-                                    type="button"
+                            <a
+                                    th:href="@{/categories/{id}/edit(id=${category.id})}"
                                     class="btn btn-sm btn-outline-primary"
-                                    title="Edit Category">
+                                    title="Edit">
 
-                                <i class="bi bi-pencil-square"></i>
+                                <i class="bi bi-pencil"></i>
 
-                            </button>
+                            </a>
 
                             <button
                                     type="button"

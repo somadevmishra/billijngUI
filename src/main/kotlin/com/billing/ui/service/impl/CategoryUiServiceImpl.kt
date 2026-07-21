@@ -3,6 +3,7 @@ package com.billing.ui.service.impl
 import com.billing.ui.client.category.CategoryApiClient
 import com.billing.ui.client.dto.category.CategoryDto
 import com.billing.ui.client.dto.category.CreateCategoryRequestDto
+import com.billing.ui.client.dto.category.UpdateCategoryRequestDto
 import com.billing.ui.config.UiProperties
 import com.billing.ui.service.CategoryUiService
 import com.billing.ui.view.category.CategoryFormView
@@ -17,68 +18,95 @@ class CategoryUiServiceImpl(
 ) : CategoryUiService {
     override fun getCategoryPage(): CategoryPageView {
 
-        val categories = categoryApiClient.findAll()
-
         return CategoryPageView(
 
             title = "Categories",
 
             subtitle = "Manage product categories.",
 
-            categories = categories.map {
+            icon = uiProperties.icons.category,
 
-                CategoryView(
+            categories = categoryApiClient.findAll()
+                .map { category ->
 
-                    code = it.code,
+                    CategoryView(
 
-                    name = it.name,
+                        id = category.id,
 
-                    description = it.description ?: "",
+                        code = category.code,
 
-                    active = it.active
+                        name = category.name,
 
-                )
+                        description = category.description,
 
-            }
+                        active = category.active
+
+                    )
+
+                }
 
         )
 
     }
 
     override fun getCreateCategoryPage(): CategoryFormView {
+
         return CategoryFormView(
+
             title = "New Category",
-            subtitle = "Create a new Category",
+
+            subtitle = "Create a new category.",
+
             icon = uiProperties.icons.category,
+
+            id = null,
+
+            code = null,
+
+            name = "",
+
+            description = "",
+
             active = true,
+
             editMode = false
+
         )
+
     }
 
-    override fun createCategory(
-        form: CategoryFormView
-    ): CategoryDto {
+    override fun getEditCategoryPage(id: Long): CategoryFormView {
 
-        return categoryApiClient.create(
+        val category = categoryApiClient.findById(id)
 
-            CreateCategoryRequestDto(
+        return CategoryFormView(
 
-                name = form.name,
+            title = "Edit Category",
 
-                description = form.description,
+            subtitle = "Update category information.",
 
-                active = form.active
+            icon = uiProperties.icons.category,
 
-            )
+            id = category.id,
+
+            code = category.code,
+
+            name = category.name,
+
+            description = category.description ?: "",
+
+            active = category.active,
+
+            editMode = true
 
         )
-
     }
 
     override fun rebuildCreateCategoryPage(
         page: CategoryFormView
-    ): CategoryFormView =
-        getCreateCategoryPage().copy(
+    ): CategoryFormView {
+
+        return getCreateCategoryPage().copy(
 
             code = page.code,
 
@@ -89,4 +117,69 @@ class CategoryUiServiceImpl(
             active = page.active
 
         )
+    }
+
+    override fun rebuildEditCategoryPage(
+        page: CategoryFormView
+    ): CategoryFormView {
+
+        val id = requireNotNull(page.id) {
+            "Category id is required."
+        }
+
+        return getEditCategoryPage(id).copy(
+
+            name = page.name,
+
+            description = page.description,
+
+            active = page.active
+
+        )
+    }
+
+    override fun createCategory(
+        page: CategoryFormView
+    ): CategoryDto {
+
+        return categoryApiClient.create(
+
+            CreateCategoryRequestDto(
+
+                name = page.name,
+
+                description = page.description,
+
+                active = page.active
+
+            )
+
+        )
+    }
+
+    override fun updateCategory(
+        page: CategoryFormView
+    ): CategoryDto {
+
+        val id = requireNotNull(page.id) {
+            "Category id is required."
+        }
+
+        return categoryApiClient.update(
+
+            id,
+
+            UpdateCategoryRequestDto(
+
+                name = page.name,
+
+                description = page.description,
+
+                active = page.active
+
+            )
+
+        )
+    }
+
 }

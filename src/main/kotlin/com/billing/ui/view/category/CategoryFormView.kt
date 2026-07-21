@@ -10,6 +10,8 @@ data class CategoryFormView(
 
     val icon: String = "",
 
+    val id: Long? = null,
+
     val code: String? = null,
 
     @field:NotBlank(message = "Category name is required")

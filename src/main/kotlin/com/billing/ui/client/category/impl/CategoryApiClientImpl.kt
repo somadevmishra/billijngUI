@@ -4,6 +4,7 @@ import com.billing.ui.client.category.CategoryApiClient
 import com.billing.ui.client.dto.category.CategoryDto
 import com.billing.ui.client.dto.category.CategoryResponse
 import com.billing.ui.client.dto.category.CreateCategoryRequestDto
+import com.billing.ui.client.dto.category.UpdateCategoryRequestDto
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClient
@@ -16,25 +17,53 @@ class CategoryApiClientImpl(
 
 ) : CategoryApiClient {
 
-    override fun findAll(): List<CategoryResponse> {
+    override fun findAll(): List<CategoryDto> {
 
         return billingRestClient
             .get()
-            .uri("api/categories")
+            .uri(CATEGORY_API)
             .retrieve()
-            .body(object : ParameterizedTypeReference<List<CategoryResponse>>() {})
+            .body(object : ParameterizedTypeReference<List<CategoryDto>>() {})
             ?: emptyList()
-
     }
 
     override fun create(request: CreateCategoryRequestDto): CategoryDto {
         return billingRestClient
             .post()
-            .uri("/api/categories")
+            .uri("$CATEGORY_API")
             .body(request)
             .retrieve()
             .body(CategoryDto::class.java)
             ?: throw IllegalStateException("Category API returned an empty response.")
     }
 
+    override fun findById(id: Long): CategoryDto {
+
+        return billingRestClient
+            .get()
+            .uri("$CATEGORY_API/{id}", id)
+            .retrieve()
+            .body(CategoryDto::class.java)
+            ?: throw IllegalStateException("Category not found.")
+    }
+
+    override fun update(
+        id: Long,
+        request: UpdateCategoryRequestDto
+    ): CategoryDto {
+
+        return billingRestClient
+            .put()
+            .uri("$CATEGORY_API/{id}", id)
+            .body(request)
+            .retrieve()
+            .body(CategoryDto::class.java)
+            ?: throw IllegalStateException(
+                "Category API returned an empty response while updating category."
+            )
+    }
+
+    private companion object {
+        const val CATEGORY_API = "/api/categories"
+    }
 }

@@ -1,7 +1,6 @@
-package com.billing.ui.view.category
+package com.billing.ui.client.dto.category
 
-data class CategoryView (
-
+data class CategoryDto(
     val id: Long,
 
     val code: String,
@@ -9,6 +8,8 @@ data class CategoryView (
     val name: String,
 
     val description: String?,
+
+    val displayOrder: Int,
 
     val active: Boolean
 )

@@ -6,10 +6,7 @@ import jakarta.validation.Valid
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 @Controller
@@ -63,5 +60,52 @@ class CategoryController(
         )
 
         return "redirect:/categories"
+    }
+
+    @PostMapping("/{id}")
+    fun updateCategory(
+
+        @PathVariable id: Long,
+
+        @Valid
+        @ModelAttribute("page")
+        page: CategoryFormView,
+        bindingResult: BindingResult,
+        model: Model,
+        redirectAttributes: RedirectAttributes
+    ): String {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute(
+                "page",
+                categoryUiService.rebuildEditCategoryPage(
+                    page.copy(id = id)
+                )
+            )
+            return "category/form"
+        }
+
+        val category = categoryUiService.updateCategory(
+            page.copy(id = id)
+        )
+        redirectAttributes.addFlashAttribute(
+            "successMessage",
+            "Category '${category.name}' (${category.code}) updated successfully."
+        )
+        return "redirect:/categories"
+    }
+
+    @GetMapping("/{id}/edit")
+    fun showEditForm(
+        @PathVariable id: Long,
+        model: Model
+    ): String {
+
+        model.addAttribute(
+            "page",
+            categoryUiService.getEditCategoryPage(id)
+        )
+
+        return "category/form"
     }
 }

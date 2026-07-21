@@ -7,6 +7,8 @@ data class CategoryPageView(
 
     val subtitle: String,
 
+    val icon: String,
+
     val searchText: String = "",
 
     val categories: List<CategoryView> = emptyList(),

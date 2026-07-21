@@ -6,11 +6,46 @@ import com.billing.ui.view.category.CategoryPageView
 
 interface CategoryUiService {
 
+    /**
+     * Builds the Category List page.
+     */
     fun getCategoryPage(): CategoryPageView
 
+    /**
+     * Builds the Create Category page.
+     */
     fun getCreateCategoryPage(): CategoryFormView
 
-    fun createCategory(form: CategoryFormView): CategoryDto
+    /**
+     * Builds the Edit Category page.
+     */
+    fun getEditCategoryPage(id: Long): CategoryFormView
 
-    fun rebuildCreateCategoryPage(page: CategoryFormView): CategoryFormView
+    /**
+     * Rebuilds the Create page after validation errors.
+     */
+    fun rebuildCreateCategoryPage(
+        page: CategoryFormView
+    ): CategoryFormView
+
+    /**
+     * Rebuilds the Edit page after validation errors.
+     */
+    fun rebuildEditCategoryPage(
+        page: CategoryFormView
+    ): CategoryFormView
+
+    /**
+     * Creates a new category.
+     */
+    fun createCategory(
+        page: CategoryFormView
+    ): CategoryDto
+
+    /**
+     * Updates an existing category.
+     */
+    fun updateCategory(
+        page: CategoryFormView
+    ): CategoryDto
 }
