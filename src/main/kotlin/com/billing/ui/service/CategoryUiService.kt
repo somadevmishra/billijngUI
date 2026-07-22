@@ -48,4 +48,6 @@ interface CategoryUiService {
     fun updateCategory(
         page: CategoryFormView
     ): CategoryDto
+
+    fun deleteCategory(id: Long)
 }

@@ -109,77 +109,55 @@ class CategoryUiServiceImpl(
         return getCreateCategoryPage().copy(
 
             code = page.code,
-
             name = page.name,
-
             description = page.description,
-
             active = page.active
-
         )
     }
 
     override fun rebuildEditCategoryPage(
         page: CategoryFormView
     ): CategoryFormView {
-
         val id = requireNotNull(page.id) {
             "Category id is required."
         }
-
         return getEditCategoryPage(id).copy(
-
             name = page.name,
-
             description = page.description,
-
             active = page.active
-
         )
     }
 
     override fun createCategory(
         page: CategoryFormView
     ): CategoryDto {
-
         return categoryApiClient.create(
-
             CreateCategoryRequestDto(
-
                 name = page.name,
-
                 description = page.description,
-
                 active = page.active
-
             )
-
         )
     }
 
     override fun updateCategory(
         page: CategoryFormView
     ): CategoryDto {
-
         val id = requireNotNull(page.id) {
             "Category id is required."
         }
-
         return categoryApiClient.update(
-
             id,
-
             UpdateCategoryRequestDto(
-
                 name = page.name,
-
                 description = page.description,
-
                 active = page.active
-
             )
-
         )
+    }
+
+    override fun deleteCategory(id: Long) {
+        categoryApiClient.delete(id)
     }
 
 }

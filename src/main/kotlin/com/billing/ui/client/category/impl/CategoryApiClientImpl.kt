@@ -63,6 +63,13 @@ class CategoryApiClientImpl(
             )
     }
 
+    override fun delete(id: Long) {
+        billingRestClient.delete()
+            .uri("$CATEGORY_API/{id}", id)
+            .retrieve()
+            .toBodilessEntity()
+    }
+
     private companion object {
         const val CATEGORY_API = "/api/categories"
     }

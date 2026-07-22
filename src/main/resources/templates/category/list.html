@@ -171,14 +171,20 @@
 
                             </a>
 
-                            <button
-                                    type="button"
-                                    class="btn btn-sm btn-outline-danger ms-1"
-                                    title="Delete Category">
+                            <form th:action="@{/categories/{id}/delete(id=${category.id})}"
+                                  method="post"
+                                  class="d-inline">
 
-                                <i class="bi bi-trash"></i>
+                                <button type="submit"
+                                        class="btn btn-sm btn-outline-danger ms-1"
+                                        title="Delete Category"
+                                        onclick="return confirm('Are you sure you want to deactivate this category?');">
 
-                            </button>
+                                    <i class="bi bi-trash"></i>
+
+                                </button>
+
+                            </form>
 
                         </td>
 

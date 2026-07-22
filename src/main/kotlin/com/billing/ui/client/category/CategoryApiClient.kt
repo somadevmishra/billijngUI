@@ -13,5 +13,7 @@ interface CategoryApiClient {
 
     fun findById(id: Long): CategoryDto
 
-    fun update( id: Long, request: UpdateCategoryRequestDto): CategoryDto
+    fun update(id: Long, request: UpdateCategoryRequestDto): CategoryDto
+
+    fun delete(id: Long)
 }

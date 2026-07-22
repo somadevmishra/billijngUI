@@ -108,4 +108,17 @@ class CategoryController(
 
         return "category/form"
     }
+
+    @PostMapping("/{id}/delete")
+    fun deleteCategory(
+        @PathVariable id: Long,
+        redirectAttributes: RedirectAttributes
+    ): String {
+        categoryUiService.deleteCategory(id)
+        redirectAttributes.addFlashAttribute(
+            "successMessage",
+            "Category deleted successfully."
+        )
+        return "redirect:/categories"
+    }
 }
