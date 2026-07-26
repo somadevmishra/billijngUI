@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
 
-</body>
+<footer th:fragment="footer">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <small class="text-muted">
+                © <span th:text="${currentYear}">2026</span>
+                <span th:text="${appName}">Cafe Billing</span>
+            </small>
+
+            <small class="text-muted">
+                Version
+                <span th:text="${appVersion}">1.0.0</span>
+            </small>
+
+        </div>
+
+    </div>
+
+</footer>
+
 </html>
