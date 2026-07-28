@@ -1,4 +1,4 @@
-package com.billing.ui.controller
+package com.billing.ui.dashboard.controller
 
 
 import org.springframework.stereotype.Controller

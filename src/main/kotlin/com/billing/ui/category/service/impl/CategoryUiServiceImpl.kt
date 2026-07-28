@@ -1,14 +1,14 @@
-package com.billing.ui.service.impl
+package com.billing.ui.category.service.impl
 
-import com.billing.ui.client.category.CategoryApiClient
-import com.billing.ui.client.dto.category.CategoryDto
-import com.billing.ui.client.dto.category.CreateCategoryRequestDto
-import com.billing.ui.client.dto.category.UpdateCategoryRequestDto
+import com.billing.ui.category.client.CategoryApiClient
+import com.billing.ui.category.dto.CategoryDto
+import com.billing.ui.category.dto.CreateCategoryRequestDto
+import com.billing.ui.category.dto.UpdateCategoryRequestDto
 import com.billing.ui.config.UiProperties
-import com.billing.ui.service.CategoryUiService
-import com.billing.ui.view.category.CategoryFormView
-import com.billing.ui.view.category.CategoryPageView
-import com.billing.ui.view.category.CategoryView
+import com.billing.ui.category.service.CategoryUiService
+import com.billing.ui.category.view.CategoryFormView
+import com.billing.ui.category.view.CategoryPageView
+import com.billing.ui.category.view.CategoryView
 import org.springframework.stereotype.Service
 
 @Service

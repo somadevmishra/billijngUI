@@ -1,8 +1,8 @@
-package com.billing.ui.service
+package com.billing.ui.category.service
 
-import com.billing.ui.client.dto.category.CategoryDto
-import com.billing.ui.view.category.CategoryFormView
-import com.billing.ui.view.category.CategoryPageView
+import com.billing.ui.category.dto.CategoryDto
+import com.billing.ui.category.view.CategoryFormView
+import com.billing.ui.category.view.CategoryPageView
 
 interface CategoryUiService {
 

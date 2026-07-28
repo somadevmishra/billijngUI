@@ -1,7 +1,7 @@
-package com.billing.ui.controller
+package com.billing.ui.category.controller
 
-import com.billing.ui.service.CategoryUiService
-import com.billing.ui.view.category.CategoryFormView
+import com.billing.ui.category.service.CategoryUiService
+import com.billing.ui.category.view.CategoryFormView
 import jakarta.validation.Valid
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model

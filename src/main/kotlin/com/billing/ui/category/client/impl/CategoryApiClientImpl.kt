@@ -1,10 +1,9 @@
-package com.billing.ui.client.category.impl
+package com.billing.ui.category.client.impl
 
-import com.billing.ui.client.category.CategoryApiClient
-import com.billing.ui.client.dto.category.CategoryDto
-import com.billing.ui.client.dto.category.CategoryResponse
-import com.billing.ui.client.dto.category.CreateCategoryRequestDto
-import com.billing.ui.client.dto.category.UpdateCategoryRequestDto
+import com.billing.ui.category.client.CategoryApiClient
+import com.billing.ui.category.dto.CategoryDto
+import com.billing.ui.category.dto.CreateCategoryRequestDto
+import com.billing.ui.category.dto.UpdateCategoryRequestDto
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClient

@@ -1,4 +1,4 @@
-package com.billing.ui.client.dto.category
+package com.billing.ui.category.dto
 
 data class CreateCategoryRequestDto(
     val name: String,

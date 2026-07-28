@@ -1,4 +1,4 @@
-package com.billing.ui.view.category
+package com.billing.ui.category.view
 
 import java.util.Collections.emptyList
 
