@@ -6,7 +6,7 @@ import java.math.BigDecimal
 data class ItemResponse(
     val id: Long,
 
-    val code: String,
+    val itemCode: String,
 
     val name: String,
 

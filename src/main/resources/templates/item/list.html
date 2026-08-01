@@ -1,10 +1,245 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/main}">
 
-</body>
+<section layout:fragment="content">
+
+    <!-- ========================================================= -->
+    <!-- Page Header -->
+    <!-- ========================================================= -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="mb-1" th:text="${page.title}">
+                Items
+            </h2>
+
+            <p class="text-muted mb-0">
+                Manage all billable items
+            </p>
+
+        </div>
+
+        <a th:href="@{/items/new}"
+           class="btn btn-primary">
+
+            <i class="bi bi-plus-circle me-1"></i>
+
+            Add Item
+
+        </a>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- Success Message -->
+    <!-- ========================================================= -->
+
+    <div
+            th:if="${successMessage}"
+            class="alert alert-success alert-dismissible fade show"
+            role="alert">
+
+        <i class="bi bi-check-circle-fill me-2"></i>
+
+        <span th:text="${successMessage}"></span>
+
+        <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+        </button>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- Search -->
+    <!-- ========================================================= -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <div class="row g-3 align-items-end">
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Search
+                    </label>
+
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Search by code or name"
+                            th:value="${page.searchText}">
+
+                </div>
+
+                <div class="col-auto">
+
+                    <button class="btn btn-primary">
+
+                        <i class="bi bi-search me-1"></i>
+
+                        Search
+
+                    </button>
+
+                </div>
+
+                <div class="col-auto">
+
+                    <button class="btn btn-outline-secondary">
+
+                        <i class="bi bi-arrow-clockwise me-1"></i>
+
+                        Reset
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- Item Table -->
+    <!-- ========================================================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-light">
+
+                    <tr>
+
+                        <th>Code</th>
+
+                        <th>Name</th>
+
+                        <th>Category</th>
+
+                        <th class="text-end">Unit Price</th>
+
+                        <th class="text-center">GST %</th>
+
+                        <th>Status</th>
+
+                        <th class="text-center" style="width: 140px;">
+                            Actions
+                        </th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="item : ${page.items}">
+
+                        <td th:text="${item.itemCode}">
+                            ITM001
+                        </td>
+
+                        <td th:text="${item.name}">
+                            Tea
+                        </td>
+
+                        <td th:text="${item.category?.name}">
+                            Beverages
+                        </td>
+
+                        <td class="text-end"
+                            th:text="${item.unitPrice}">
+                            10.00
+                        </td>
+
+                        <td class="text-center"
+                            th:text="${item.gstPercentage}">
+                            5
+                        </td>
+
+                        <td>
+
+                            <span
+                                    class="badge"
+                                    th:classappend="${item.active} ? ' bg-success' : ' bg-secondary'"
+                                    th:text="${item.active} ? 'Active' : 'Inactive'">
+
+                                Active
+
+                            </span>
+
+                        </td>
+
+                        <td class="text-center">
+
+                            <a
+                                    th:href="@{/items/{id}/edit(id=${item.id})}"
+                                    class="btn btn-sm btn-outline-primary"
+                                    title="Edit">
+
+                                <i class="bi bi-pencil"></i>
+
+                            </a>
+
+                            <button
+                                    type="button"
+                                    class="btn btn-sm btn-outline-danger ms-1"
+                                    title="Delete Item">
+
+                                <i class="bi bi-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr th:if="${#lists.isEmpty(page.items)}">
+
+                        <td colspan="7"
+                            class="text-center text-muted py-4">
+
+                            No items found.
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer text-muted">
+
+            Showing
+
+            <strong th:text="${page.totalRecords}">0</strong>
+
+            Items
+
+        </div>
+
+    </div>
+
+</section>
+
 </html>
